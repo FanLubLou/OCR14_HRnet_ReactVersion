@@ -1,0 +1,443 @@
+
+
+/****************** CSS hérité de la création de Create React App.  ************/
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+/******************** Palette de couleurs ******************/
+
+:root {
+    --primary-Green: #18681a;
+    --primary-Green-light: #45a049;
+    --primary-Green-dark: #0f3a0d;
+    --secondary-Gray: #f9f9f9;
+    --secondary-Gray-light: #ffffff;
+    --secondary-Gray-semi-dark: #ccc;
+    --secondary-Gray-pale: #ddd;
+    --secondary-Gray-dark: #333;
+    --secondary-Gray-dim: #666;
+    --secondary-Gray-dim-2: #777;
+    --tertiary-white: white;
+    --tertiary-white-off: #f1f1f1;
+    --danger-Red: #ff0000;
+    --danger-Red-light: #ff3333;
+    --danger-Red-dark: #cc0000;
+  }
+
+
+/******************** CSS du formulaire d'employé *************/
+  .employeeForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--secondary-Gray-semi-dark);
+    border-radius: 10px;
+    background-color: var(--secondary-Gray-light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .employeeForm label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--secondary-Gray-dark);
+  }
+  
+  .employeeForm input,
+  .employeeForm select {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid var(--secondary-Gray-semi-dark);
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .employeeForm button {
+    margin-top: 32px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: var(--primary-Green);
+    color: var(--tertiary-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .employeeForm button:hover {
+    background-color: var(--primary-Green-light);    
+  }
+  
+  fieldset.address {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid var(--secondary-Gray-semi-dark);
+    border-radius: 5px;
+    background-color: var(--tertiary-white-off);
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  fieldset.address legend {
+    font-weight: bold;
+    color: var(--secondary-Gray-dark);
+  }
+  
+  .address-input {
+    display: flex;
+    gap: 5px;
+    
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    color: var(--secondary-Gray-dark);
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  h2 {
+    font-size: 2em;
+    color: var(--secondary-Gray-dim);
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  a {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    color: var(--primary-Green);
+    text-decoration: none;
+    font-size: 1.2em;
+  }
+  
+  a:hover {
+    color: var(--primary-Green-light);
+    text-decoration: underline;
+  }
+
+
+/****************** CSS spécifique du composant datePicker ************/
+
+.react-datepicker__month-container {
+    min-width: 350px;
+  }
+
+/****************** CSS du modal ************/
+  
+   .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 80%;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  h2{
+    margin: 0;
+    color: var(--primary-Green);
+  }
+  
+  .modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .modal-content {
+    position: relative; 
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; 
+  }
+  
+  .close-button:hover {
+    color: var(--danger-Red); 
+  }
+  
+ /***************** css du tableau de données de la liste des employéés ************/ 
+
+  .containerEmployeeTable {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: var(--secondary-Gray);
+      border: 1px solid var(--secondary-Gray-semi-dark);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .headerEmployeeTable {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+  }
+  
+  .itemsEmployeeTable select,
+  .searchEmployeeTable input {
+      padding: 8px;
+      border: 1px solid var(--secondary-Gray-semi-dark);
+      border-radius: 5px;
+      font-size: 16px;
+  }
+  
+  .employeeTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+  }
+  
+  .employeeTable th,
+  .employeeTable td {
+      padding: 12px;
+      border: 1px solid var(--secondary-Gray-pale);
+      text-align: left;
+      font-size: 16px;
+      color: var(--secondary-Gray-dark);
+  }
+  
+  .employeeTable th {
+      background-color: var(--tertiary-white-off);
+      font-weight: bold; 
+  }
+  
+  .employeeTable tr:nth-child(even) {
+      background-color: var(--secondary-Gray); 
+}
+  
+  .EmployeeTable-no-data {
+      text-align: center;
+      color: var(--secondary-Gray-dim-2);
+      font-style: italic;
+  }
+  
+  .employeeTable-footer {
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  .employeeTable-info {
+      color: var(--secondary-Gray-dark);
+      font-size: 16px;
+  }
+  
+  .employeeTable-pagination button {
+      padding: 10px 15px;
+      background-color: var(--primary-Green-light);
+      color: var(--tertiary-white);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-left: 5px;
+  }
+  
+  .employeeTable-pagination button:hover {
+      background-color: var(--primary-Green-light);
+  }
+  
+  .employeeTable-pagination button:disabled {
+      background-color: var(--secondary-Gray-semi-dark);
+      cursor: not-allowed;
+  }
+  
+  .error {
+    color: var(--danger-Red);
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+      .containerEmployeeTable {
+          padding: 10px;
+      }
+  
+      .headerEmployeeTable {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  
+      .employeeTable-info,
+      .employeeTable-pagination {
+          font-size: 14px;
+      }
+  
+      .employeeTable th,
+      .employeeTable td {
+          font-size: 14px;
+      }
+  
+      .itemsEmployeeTable select,
+      .searchEmployeeTable input {
+          font-size: 14px;
+      }
+  
+      .employeeTable-pagination button {
+          font-size: 14px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+      .containerEmployeeTable {
+          padding: 5px;
+      }
+  
+      .headerEmployeeTable {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  
+      .employeeTable-info,
+      .employeeTable-pagination {
+          font-size: 12px;
+      }
+  
+      .employeeTable th,
+      .employeeTable td {
+          font-size: 12px;
+      }
+  
+      .itemsEmployeeTable select,
+      .searchEmployeeTable input {
+          font-size: 12px;
+      }
+  
+      .employeeTable-pagination button {
+          font-size: 12px;
+    }
+  }
+  @media (max-width: 768px) {
+    .employeeForm {
+      padding: 10px;
+    }
+  
+    .employeeForm label {
+      font-size: 14px;
+    }
+  
+    .employeeForm input,
+    .employeeForm select {
+      font-size: 14px;
+      padding: 8px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  
+    .employeeForm button {
+      font-size: 14px;
+          
+    }
+  
+    h1 {
+      font-size: 2em;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    a {
+      font-size: 1em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .employeeForm {
+      padding: 5px;
+    }
+  
+    .employeeForm label {
+      font-size: 12px;
+    }
+  
+    .employeeForm input,
+    .employeeForm select {
+      font-size: 12px;
+      padding: 6px;
+      
+    }
+  
+    .employeeForm button {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    h1 {
+      font-size: 1.5em;
+    }
+  
+    h2 {
+      font-size: 1.2em;
+    }
+  
+    a {
+      font-size: 0.9em;
+    }
+  }
+
+/*************************** CSS du composant sortableHeader *************/
+
+.sortableHeaderContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.sortableHeaderIndicator {
+    width: 1em;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+  }
+ 
+  
+  
