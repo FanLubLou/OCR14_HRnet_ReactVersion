@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ComponentSortableHeader from './ComponentSortableHeader';
 import { deleteEmployee } from '../features/Employee/EmployeeSlice';
+import { FaTimes } from 'react-icons/fa';
+import { FaPen } from 'react-icons/fa';
 
 const EmployeeListComponent = () => {
 
@@ -128,15 +130,15 @@ const EmployeeListComponent = () => {
                   <td>{item.state}</td>
                   <td>{item.zipCode}</td>
                   <td>
-                    <button onClick={() => handleEdit(item.id)} className="edit-btn">
-                                ✏️
+                    <button onClick={() => handleEdit(item.id)} className="edit-button">
+                      <FaPen />
                     </button>
                     </td>
                     <td>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="delete-btn">
-                      ❌
+                      className="delete-button">
+                      <FaTimes />
                     </button>
                   </td>
                 </tr>
