@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ComponentSortableHeader from './ComponentSortableHeader';
-
+import { deleteEmployee } from '../features/Employee/EmployeeSlice';
 
 const EmployeeListComponent = () => {
+
+  /***********  déclaration et initilisation des états et de leur fonction de modification***************/
+  
     const employees = useSelector((state) => state.employees.employees); 
     const [search, setSearch] = useState(""); 
     const [entries, setEntries] = useState(10); 
     const [filteredData, setFilteredData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+
+  /***********  Instanciation des hooks ***************/  
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+  /*************Effet secondaire déclenché après le rendu et son tableau de dépendance **********/
 
     useEffect(() => {
       let result = employees.filter(
@@ -23,7 +34,9 @@ const EmployeeListComponent = () => {
       setFilteredData(result);
     }, [search, employees, sortConfig]);
 
-    const handleSearchChange = (e) => {
+/*************Effet secondaire déclenché après le rendu et son tableau de dépendance **********/
+
+  const handleSearchChange = (e) => {
       setSearch(e.target.value);
     };
 
@@ -57,6 +70,15 @@ const EmployeeListComponent = () => {
     setSortConfig({ key, direction });
   };
 
+  const handleDelete = (employeeId) => {
+    if (window.confirm('Are you sure you want to delete this employee?')) {
+      dispatch(deleteEmployee(employeeId));
+    }
+  };
+
+  const handleEdit = (employeeId) => {
+    navigate(`/edit/${employeeId}`);
+};
 
     return (
       <div className="containerEmployeeTable">
@@ -88,6 +110,8 @@ const EmployeeListComponent = () => {
             <ComponentSortableHeader column="city" label="City" sortConfig={sortConfig} requestSort={requestSort} />
             <ComponentSortableHeader column="state" label="State" sortConfig={sortConfig} requestSort={requestSort} />
             <ComponentSortableHeader column="zipCode" label="Zip Code" sortConfig={sortConfig} requestSort={requestSort} />
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
           <tbody>
@@ -103,11 +127,23 @@ const EmployeeListComponent = () => {
                   <td>{item.city}</td>
                   <td>{item.state}</td>
                   <td>{item.zipCode}</td>
+                  <td>
+                    <button onClick={() => handleEdit(item.id)} className="edit-btn">
+                                ✏️
+                    </button>
+                    </td>
+                    <td>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="delete-btn">
+                      ❌
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="9" className="employeeTable-no-data">
+                <td colSpan="11" className="employeeTable-no-data">
                   No data available in table
                 </td>
               </tr>

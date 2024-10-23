@@ -1,65 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { states } from '../data/states';
-import { useDispatch } from 'react-redux';
-import { addEmployee } from '../features/Employee/EmployeeSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEmployee, editEmployee } from '../features/Employee/EmployeeSlice.js';
 import Modal from "react-modal";
 import { FaTimes } from 'react-icons/fa';
+import {useParams} from 'react-router-dom';
 
 // Définition de l'élément racine de ton application pour l'accessibilité
 Modal.setAppElement('#root');
 
 const ComponentEmployeeForm = () => {
 
+   
+   
+/***********  déclaration et initilisation des états et de leur fonction de modification***************/
   const [formData, setFormData] = useState({
       firstName: "",
-      lastName: "",
-      dateOfBirth: new Date(),
-      startDate: new Date(),
-      street: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      department: "",
-    });
-    const [errors, setErrors] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
-   
-    const dispatch = useDispatch();
+    lastName: "",
+    dateOfBirth: new Date(),
+    startDate: new Date(),
+    street: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    department: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleChange = (name, value) => {
-      setFormData((prevState) => ({ ...prevState, [name]: value }));
-    };
+/***********  Instanciation des hooks ***************/  
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
-    const handleDateChange = (name, date) => {
-      setFormData((prevState) => ({ ...prevState, [name]: date }));
-    };
-
-    const validateForm = () => {
-      const newErrors = {};
-      Object.keys(formData).forEach((key) => {
-        if (!formData[key]) {
-          newErrors[key] = "This field is required";
-        }
-      });
-      setErrors(newErrors);
-      return Object.keys(newErrors).length === 0;
-    };
-
-    const saveEmployee = () => {
-      if (!validateForm()) {
-        return;
-      }
-      const serializedData = {
-        ...formData,
-        dateOfBirth: formData.dateOfBirth.toISOString(),
-        startDate: formData.startDate.toISOString(),
-      };
-      dispatch(addEmployee(serializedData));
-      setIsModalOpen(true);     
+/***********  déclaration des fonctions ***************/
+  const handleChange = (name, value) => {
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-  
+
+  const handleDateChange = (name, date) => {
+    setFormData((prevState) => ({ ...prevState, [name]: date }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key]) {
+        newErrors[key] = "This field is required";
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const saveEmployee = () => {
+    if (!validateForm()) {
+      return;
+    }
+    const serializedData = {
+      ...formData,
+      id: id || Date.now().toString(),
+      dateOfBirth: formData.dateOfBirth.toISOString(),
+      startDate: formData.startDate.toISOString(),
+    };
+    if (id) {
+      dispatch(editEmployee({ ...serializedData, id }));
+    } else {
+      dispatch(addEmployee(serializedData));
+    }
+    setIsModalOpen(true);     
+  };
+
   const resetForm = () => {
     setFormData({
       firstName: "",
@@ -78,6 +90,21 @@ const ComponentEmployeeForm = () => {
     setIsModalOpen(false);
     resetForm();
   };
+
+  const employeeToEdit = useSelector(state => 
+    state.employees.employees.find(emp => emp.id === id)
+  );
+
+/*************Effet secondaire déclenché après le rendu et son tableau de dépendance **********/
+  useEffect(() => {
+    if (id && employeeToEdit) {
+      setFormData({
+        ...employeeToEdit,
+        dateOfBirth: new Date(employeeToEdit.dateOfBirth),
+        startDate: new Date(employeeToEdit.startDate),
+      });
+    }
+  }, [id, employeeToEdit]);
 
     return (
       <div>
@@ -175,7 +202,7 @@ const ComponentEmployeeForm = () => {
           {errors.department && <span className="error">{errors.department}</span>}
 
           <button type="button" onClick={saveEmployee}>
-            Save
+            {id ? "Update Employee" : "Add Employee"}
           </button>
         </form>
         <Modal
@@ -192,7 +219,7 @@ const ComponentEmployeeForm = () => {
                   <FaTimes />
                 </button>
               </div> 
-              <p>Employee saved successfully!</p>
+              <p>{id ? 'Employee updated successfully!' : 'Employee saved successfully!'}</p>
             </div>
           </div>          
         </Modal>
