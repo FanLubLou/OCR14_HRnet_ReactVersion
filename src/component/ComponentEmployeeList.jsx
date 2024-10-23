@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ComponentSortableHeader from './ComponentSortableHeader';
 import { deleteEmployee } from '../features/Employee/EmployeeSlice';
 import { FaTimes } from 'react-icons/fa';
-import { FaPen } from 'react-icons/fa';
+import { FaPenToSquare } from 'react-icons/fa6';
 
 const EmployeeListComponent = () => {
 
@@ -131,7 +131,7 @@ const EmployeeListComponent = () => {
                   <td>{item.zipCode}</td>
                   <td>
                     <button onClick={() => handleEdit(item.id)} className="edit-button">
-                      <FaPen />
+                      <FaPenToSquare />
                     </button>
                     </td>
                     <td>

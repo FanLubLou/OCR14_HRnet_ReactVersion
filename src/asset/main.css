@@ -188,9 +188,9 @@ body {
     cursor: pointer;
     font-size: 20px;
   }
-  .edit-button{
+  /* .edit-button{
     font-size: 15px;
-  }
+  } */
   
   .modal-content {
     position: relative; 
