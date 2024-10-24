@@ -86,7 +86,7 @@ const EmployeeListComponent = () => {
       <div className="containerEmployeeTable">
         <div className="headerEmployeeTable">
           <div className="itemsEmployeeTable">
-            Show{" "}
+          <label htmlFor="entries">Show{" "}</label>
             <select value={entries} onChange={handleEntriesChange}>
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -96,7 +96,8 @@ const EmployeeListComponent = () => {
             entries
           </div>
           <div className="searchEmployeeTable">
-            Search: <input type="text" value={search} onChange={handleSearchChange} />
+            <label htmlFor="search">Search:</label>
+            <input type="text" value={search} onChange={handleSearchChange} />
           </div>
         </div>
 
@@ -130,14 +131,18 @@ const EmployeeListComponent = () => {
                   <td>{item.state}</td>
                   <td>{item.zipCode}</td>
                   <td>
-                    <button onClick={() => handleEdit(item.id)} className="edit-button">
-                      <FaPenToSquare />
+                    <button
+                      onClick={() => handleEdit(item.id)}
+                      className="edit-button"
+                      aria-label={`Edit ${item.firstName} ${item.lastName}`}>
+                        <FaPenToSquare />
                     </button>
                     </td>
                     <td>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      className="delete-button">
+                      className="delete-button"
+                      aria-label={`Delete ${item.firstName} ${item.lastName}`}>
                       <FaTimes />
                     </button>
                   </td>

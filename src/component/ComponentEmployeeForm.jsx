@@ -215,7 +215,11 @@ const ComponentEmployeeForm = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h2>Success</h2>
-                <button className="close-button" onClick={() => closeModal()}>
+                <button
+                  className="close-button"
+                  onClick={() => closeModal()}
+                  aria-label="close modal"
+                >                 
                   <FaTimes />
                 </button>
               </div> 
