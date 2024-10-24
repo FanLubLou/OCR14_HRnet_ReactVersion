@@ -4,15 +4,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { states } from '../data/states';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, editEmployee } from '../features/Employee/EmployeeSlice.js';
-import Modal from "react-modal";
-import { FaTimes } from 'react-icons/fa';
-import {useParams} from 'react-router-dom';
+import { FaTimes } from 'react-icons/fa'
+import { useParams } from 'react-router-dom';
+
+// Importation dynamique de la bibliothèque react-modal pour améliorer le score lighthouse
+const Modal = React.lazy(() => import("react-modal"));
 
 // Définition de l'élément racine de ton application pour l'accessibilité
 Modal.setAppElement('#root');
 
 const ComponentEmployeeForm = () => {
-
+  
    
    
 /***********  déclaration et initilisation des états et de leur fonction de modification***************/
