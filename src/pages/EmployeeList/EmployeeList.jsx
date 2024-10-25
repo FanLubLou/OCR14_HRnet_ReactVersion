@@ -1,5 +1,5 @@
 import React from 'react';
-import ComponentEmployeeList from '../../component/ComponentEmployeeList';
+import ComponentEmployeeList from '../../component/ComponentEmployeeList/ComponentEmployeeList';
 import { Link } from 'react-router-dom';
 
 export default function EmployeeList() {

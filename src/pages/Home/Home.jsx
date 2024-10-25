@@ -1,5 +1,5 @@
 import React from 'react';
-import ComponentEmployeeForm from '../../component/ComponentEmployeeForm'
+import ComponentEmployeeForm from '../../component/ComponentEmployeeForm/ComponentEmployeeForm'
 import { Link } from 'react-router-dom';
 
 export default function Home() {

@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { states } from '../data/states';
+import { states } from '../../data/states.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmployee, editEmployee } from '../features/Employee/EmployeeSlice.js';
-import { FaTimes } from 'react-icons/fa'
+import { addEmployee, editEmployee } from '../../features/Employee/EmployeeSlice.js';
+import { FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import Modal from 'react-modal';
 
-// Importation dynamique de la bibliothèque react-modal pour améliorer le score lighthouse
-const Modal = React.lazy(() => import("react-modal"));
 
-// Définition de l'élément racine de ton application pour l'accessibilité
-Modal.setAppElement('#root');
+/**
+ * Set the app root for accessibility, excluding test environments.
+ */
+if (process.env.NODE_ENV !== 'test') {
+  Modal.setAppElement('#root');
+}
+
+/**
+ * Employee form component for adding and editing employees.
+ *
+ * @component
+ * @returns {JSX.Element} Employee form UI
+ */
+
 
 const ComponentEmployeeForm = () => {
-  
+
+/** 
+ * State management for form data, error handling, and modal visibility.
+ * @type {object} formData - Employee form data.
+ * @type {object} errors - Form validation errors.
+ * @type {boolean} isModalOpen - Modal visibility status.
+ */ 
    
    
-/***********  déclaration et initilisation des états et de leur fonction de modification***************/
+/***********  declaration and initialization of states and their modification function***************/
   const [formData, setFormData] = useState({
       firstName: "",
     lastName: "",
@@ -32,18 +49,41 @@ const ComponentEmployeeForm = () => {
   const [errors, setErrors] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-/***********  Instanciation des hooks ***************/  
+  /***********  Hook's Instanciation  ***************/
+// Get employee ID from URL params and dispatch function  
   const { id } = useParams();
   const dispatch = useDispatch();
 
-/***********  déclaration des fonctions ***************/
+  /***********  Function's declaration ***************/
+  
+   /**
+   * Handles changes to form fields and updates the formData state.
+   *
+   * @param {string} name - The field name being updated.
+   * @param {string|number|Date} value - The new value for the field.
+   */
+
   const handleChange = (name, value) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
+   /**
+   * Handles date selection and updates the formData state for date fields.
+   *
+   * @param {string} name - The date field being updated.
+   * @param {Date} date - The new selected date.
+   */
+
   const handleDateChange = (name, date) => {
     setFormData((prevState) => ({ ...prevState, [name]: date }));
   };
+
+   /**
+   * Validates the form fields and sets error messages.
+   *
+   * @returns {boolean} True if the form is valid, otherwise false.
+   */
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -55,6 +95,10 @@ const ComponentEmployeeForm = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+    /**
+   * Saves the employee data if the form is valid and opens the modal.
+   */
 
   const saveEmployee = () => {
     if (!validateForm()) {
@@ -74,6 +118,10 @@ const ComponentEmployeeForm = () => {
     setIsModalOpen(true);     
   };
 
+ /**
+   * Resets the form fields to their initial state.
+   */
+
   const resetForm = () => {
     setFormData({
       firstName: "",
@@ -87,17 +135,26 @@ const ComponentEmployeeForm = () => {
       department: "",
     });
   };
+
+   /**
+   * Closes the modal and resets the form.
+   */
   
   const closeModal = () => {
     setIsModalOpen(false);
     resetForm();
   };
 
+   // Fetch the employee to edit based on the ID from the URL params
+
   const employeeToEdit = useSelector(state => 
     state.employees.employees.find(emp => emp.id === id)
   );
 
-/*************Effet secondaire déclenché après le rendu et son tableau de dépendance **********/
+  /************* Side effect triggered after rendering and its dependency table **********/
+   /**
+   * Populates form fields when editing an existing employee.
+   */
   useEffect(() => {
     if (id && employeeToEdit) {
       setFormData({
@@ -140,6 +197,7 @@ const ComponentEmployeeForm = () => {
             Date of Birth
           </label>
           <DatePicker
+            data-testid="date-of-birth-picker"
             selected={formData.dateOfBirth}
             onChange={(date) => handleDateChange("dateOfBirth", date)}
             showMonthDropdown
@@ -153,6 +211,7 @@ const ComponentEmployeeForm = () => {
             Start Date
           </label>
           <DatePicker
+            data-testid="date-of-birth-picker"
             selected={formData.startDate}
             onChange={(date) => handleDateChange("startDate", date)}
             showMonthDropdown
