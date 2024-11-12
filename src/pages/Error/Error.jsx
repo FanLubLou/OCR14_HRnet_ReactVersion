@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Error component displays a 404 error page.
+ * 
+ * This component renders a simple error page with a 404 message,
+ * an explanation, and a link to return to the home page.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered 404 error page
+ */
 export default function Error() {
   return (
     <div className='wrapperError'>

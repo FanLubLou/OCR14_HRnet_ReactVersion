@@ -15,6 +15,13 @@ body {
       monospace;
   }
 
+/****************** Global reset for box-sizing ***********/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}  
+
 /******************** color variables ******************/
 
 :root {
@@ -213,6 +220,7 @@ body {
 
   
   .containerEmployeeTable {
+      min-height: 400px;
       max-width: 1250px;
       margin: 20px auto;
       padding: 20px;

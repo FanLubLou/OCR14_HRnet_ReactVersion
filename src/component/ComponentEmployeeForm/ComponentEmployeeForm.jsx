@@ -79,10 +79,14 @@ const ComponentEmployeeForm = () => {
   };
 
    /**
-   * Validates the form fields and sets error messages.
-   *
-   * @returns {boolean} True if the form is valid, otherwise false.
-   */
+ * Validates the form fields and sets error messages.
+ * 
+ * This function iterates through all form fields in the formData object.
+ * For each empty field, it adds an error message to the newErrors object.
+ * After checking all fields, it updates the errors state with newErrors.
+ *
+ * @returns {boolean} True if the form is valid (no empty fields), otherwise false.
+ */
 
 
   const validateForm = () => {
@@ -96,9 +100,17 @@ const ComponentEmployeeForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-    /**
-   * Saves the employee data if the form is valid and opens the modal.
-   */
+   /**
+ * Saves the employee data if the form is valid and opens the modal.
+ * 
+ * This function first validates the form using validateForm().
+ * If the form is valid, it prepares the data for submission by:
+ * 1. Creating a copy of formData
+ * 2. Adding an id (either existing or new)
+ * 3. Converting date objects to ISO strings
+ * Then, it dispatches either an edit or add action based on whether an id exists.
+ * Finally, it opens the success modal.
+ */
 
   const saveEmployee = () => {
     if (!validateForm()) {
@@ -119,26 +131,36 @@ const ComponentEmployeeForm = () => {
   };
 
  /**
-   * Resets the form fields to their initial state.
-   */
+ * Resets the form fields to their initial state.
+ * 
+ * This function creates a new object with all form fields set to their default values:
+ * - Empty strings for text fields
+ * - New Date() objects for date fields
+ * It then updates the formData state with this new object, effectively clearing the form.
+ */
 
-  const resetForm = () => {
-    setFormData({
-      firstName: "",
-      lastName: "",
-      dateOfBirth: new Date(),
-      startDate: new Date(),
-      street: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      department: "",
-    });
-  };
+ const resetForm = () => {
+  setFormData({
+    firstName: "",
+    lastName: "",
+    dateOfBirth: new Date(),
+    startDate: new Date(),
+    street: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    department: "",
+  });
+};
 
    /**
-   * Closes the modal and resets the form.
-   */
+ * Closes the modal and resets the form.
+ * 
+ * This function performs two actions:
+ * 1. It sets isModalOpen to false, which closes the modal
+ * 2. It calls resetForm() to clear all form fields
+ * This ensures that when the modal is closed, the form is ready for a new entry.
+ */
   
   const closeModal = () => {
     setIsModalOpen(false);
@@ -151,10 +173,19 @@ const ComponentEmployeeForm = () => {
     state.employees.employees.find(emp => emp.id === id)
   );
 
-  /************* Side effect triggered after rendering and its dependency table **********/
+  
    /**
-   * Populates form fields when editing an existing employee.
-   */
+ * Effect hook to populate form fields when editing an existing employee.
+ * 
+ * This effect runs when the component mounts or when the id or employeeToEdit changes.
+ * It checks if an id is present and if the corresponding employee data exists.
+ * If both conditions are met, it populates the form with the employee's data,
+ * converting date strings to Date objects for the date fields.
+ *
+ * @effect
+ * @dependency {string|undefined} id - The ID of the employee being edited, derived from URL params.
+ * @dependency {Object|undefined} employeeToEdit - The employee data object fetched from the Redux store.
+ */
   useEffect(() => {
     if (id && employeeToEdit) {
       setFormData({
@@ -164,6 +195,52 @@ const ComponentEmployeeForm = () => {
       });
     }
   }, [id, employeeToEdit]);
+
+  /**
+ * Effect that listens for keydown events and closes the modal if the "Enter" or "Space" key is pressed.
+ * The modal is only closed if it is currently open. It also resets the form data when closing the modal.
+ *
+ * Dependencies:
+ * - `isModalOpen`: Determines whether the modal is currently open.
+ */
+useEffect(() => {
+  /**
+   * Handles the keydown event and checks if the "Enter" or "Space" key is pressed.
+   * Closes the modal and resets the form data if the modal is open.
+   *
+   * @param {KeyboardEvent} event - The keyboard event triggered by user input.
+   */
+  const handleKeyDown = (event) => {
+    if ((event.key === 'Enter' || event.key === ' ') && isModalOpen) {
+      setIsModalOpen(false);
+      event.preventDefault();
+      setFormData({
+        firstName: "",
+        lastName: "",
+        dateOfBirth: new Date(),
+        startDate: new Date(),
+        street: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        department: "",
+      });
+    }
+  };
+
+  // Adds the keydown event listener to the window object.
+  window.addEventListener('keydown', handleKeyDown);
+
+  /**
+   * Cleanup function that removes the keydown event listener
+   * to prevent memory leaks when the component is unmounted or dependencies change.
+   */
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [isModalOpen]);
+
+
 
     return (
       <div>
@@ -262,21 +339,25 @@ const ComponentEmployeeForm = () => {
           </select>
           {errors.department && <span className="error">{errors.department}</span>}
 
-          <button type="button" onClick={saveEmployee}>
+          <button
+            type="button"
+            onClick={saveEmployee}
+          >
             {id ? "Update Employee" : "Add Employee"}
           </button>
         </form>
         <Modal
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)} 
+          isOpen={isModalOpen}          
+          onRequestClose={closeModal}
           ariaHideApp={false}
-          className="modal" //déclarer une className permet de désactiver les classes de style par défaut
+          className="modal" //declaring a className allows you to disable default style classes          
           >
           <div className="modal-overlay">
             <div className="modal-content">
               <div className="modal-header">
                 <h2>Success</h2>
                 <button
+                  type="button"
                   className="close-button"
                   onClick={() => closeModal()}
                   aria-label="close modal"

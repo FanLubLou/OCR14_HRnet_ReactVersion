@@ -11,6 +11,6 @@ test('renders App component without crashing', () => {
     </Provider>
   );   
   
- // On vérifie simplement que le composant se rend sans erreur
+ // checking if component is rendered without any error
   expect(document.body).toBeInTheDocument();
 });
