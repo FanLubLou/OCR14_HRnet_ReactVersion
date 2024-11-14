@@ -260,62 +260,64 @@ const formatDate = (dateString) => {
           </div>
         </div>
 
-        <table className="employeeTable">
-          <thead>
-            <tr>
-              <ComponentSortableHeader column="firstName" label="First Name" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="lastName" label="Last Name" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="startDate" label="Start Date" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="department" label="Department" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="dateOfBirth" label="Date of Birth" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="street" label="Street" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="city" label="City" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="state" label="State" sortConfig={sortConfig} requestSort={requestSort} />
-              <ComponentSortableHeader column="zipCode" label="Zip Code" sortConfig={sortConfig} requestSort={requestSort} />
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length > 0 ? (
-              currentItems.map((item, index) => (
-                <tr key={item.id}>
-                  <td>{item.firstName}</td>
-                  <td>{item.lastName}</td>
-                  <td>{formatDate(item.startDate)}</td>
-                  <td>{item.department}</td>
-                  <td>{formatDate(item.dateOfBirth)}</td>        
-                  <td>{item.street}</td>
-                  <td>{item.city}</td>
-                  <td>{item.state}</td>
-                  <td>{item.zipCode}</td>
-                  <td>
-                    <button
-                      onClick={() => handleEdit(item.id)}
-                      className="edit-button"
-                      aria-label={`Edit ${item.firstName} ${item.lastName}`}>
-                        <FaPenToSquare />
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      className="delete-button"
-                      aria-label={`Delete ${item.firstName} ${item.lastName}`}>
-                      <FaTimes />
-                    </button>
+        <div className="table-container">
+          <table className="employeeTable">
+            <thead>
+              <tr>
+                <ComponentSortableHeader column="firstName" label="First Name" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="lastName" label="Last Name" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="startDate" label="Start Date" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="department" label="Department" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="dateOfBirth" label="Date of Birth" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="street" label="Street" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="city" label="City" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="state" label="State" sortConfig={sortConfig} requestSort={requestSort} />
+                <ComponentSortableHeader column="zipCode" label="Zip Code" sortConfig={sortConfig} requestSort={requestSort} />
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.length > 0 ? (
+                currentItems.map((item, index) => (
+                  <tr key={item.id}>
+                    <td>{item.firstName}</td>
+                    <td>{item.lastName}</td>
+                    <td>{formatDate(item.startDate)}</td>
+                    <td>{item.department}</td>
+                    <td>{formatDate(item.dateOfBirth)}</td>        
+                    <td>{item.street}</td>
+                    <td>{item.city}</td>
+                    <td>{item.state}</td>
+                    <td>{item.zipCode}</td>
+                    <td>
+                      <button
+                        onClick={() => handleEdit(item.id)}
+                        className="edit-button"
+                        aria-label={`Edit ${item.firstName} ${item.lastName}`}>
+                          <FaPenToSquare />
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="delete-button"
+                        aria-label={`Delete ${item.firstName} ${item.lastName}`}>
+                        <FaTimes />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="11" className="employeeTable-no-data">
+                    No data available in table
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="11" className="employeeTable-no-data">
-                  No data available in table
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>  
 
         <div className="employeeTable-footer">
           <div className="employeeTable-info">

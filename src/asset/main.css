@@ -1,5 +1,5 @@
 
-
+/* #region GENERAL */
 /****************** CSS inherited from Create React App creation  ************/
 
 body {
@@ -22,7 +22,7 @@ body {
   box-sizing: border-box;
 }  
 
-/******************** color variables ******************/
+/******************** Color Palette Definition ******************/
 
 :root {
     --primary-Green: #18811c;
@@ -42,8 +42,9 @@ body {
     --danger-Red-dark: #cc0000;
   }
 
+/* #endregion */
 
-/******************** ComponentEmployeeForm CSS *************/
+/* #region ComponentEmployeeForm + modal + datePicker */
   .employeeForm {
     display: flex;
     flex-direction: column;
@@ -109,7 +110,11 @@ body {
   .address-input {
     display: flex;
     gap: 5px;
-    
+  }
+
+  /*fixing a width to have a nice fields aligment with low screen resolution  */
+  .address-input label {
+    width: 50px;
   }
   
   h1 {
@@ -216,8 +221,83 @@ body {
     color: var(--danger-Red); 
   }
   
- /***************** EmployeeList dataTable component CSS  ************/
+/* #endregion */
 
+/* #region ComponentEmployeeForm  768px*/
+
+@media (max-width: 768px) {
+  .employeeForm {
+    padding: 10px;
+  }
+
+  .employeeForm label {
+    font-size: 14px;
+  }
+
+  .employeeForm input,
+  .employeeForm select {
+    font-size: 14px;
+    padding: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .employeeForm button {
+    font-size: 14px;
+        
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  a {
+    font-size: 1em;
+  }
+}
+/* #endregion */
+
+/* #region ComponentEmployeeForm  480px*/
+@media (max-width: 480px) {
+  .employeeForm {
+    padding: 5px;
+  }
+
+  .employeeForm label {
+    font-size: 12px;
+  }
+
+  .employeeForm input,
+  .employeeForm select {
+    font-size: 12px;
+    padding: 6px;
+    
+  }
+
+  .employeeForm button {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  a {
+    font-size: 0.9em;
+  }
+}
+/* #endregion */
+
+ /* #region EmployeeList dataTable */
   
   .containerEmployeeTable {
       min-height: 400px;
@@ -244,16 +324,24 @@ body {
       font-size: 16px;
   }
   
+   /* Enable horizontal scrolling on small screens */
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+
   .employeeTable {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 15px;
+      min-width: 768px;
   }
   
   .employeeTable th,
   .employeeTable td {
-      /* min-width: 8px; */
-      padding: 12px;
+      padding: 8px;
       border: 1px solid var(--secondary-Gray-pale);
       text-align: center;
       font-size: 16px;
@@ -310,7 +398,10 @@ body {
     color: var(--danger-Red);
     padding: 10px;
   }
-  
+
+  /* #endregion */
+
+/* #region EmployeeList dataTable 768px*/
   @media (max-width: 768px) {
       .containerEmployeeTable {
           padding: 10px;
@@ -340,7 +431,10 @@ body {
           font-size: 14px;
       }
   }
-  
+
+ /* #endregion */  
+ 
+/* #region EmployeeList dataTable 480px*/ 
   @media (max-width: 480px) {
       .containerEmployeeTable {
           padding: 5px;
@@ -370,76 +464,10 @@ body {
           font-size: 12px;
     }
   }
-  @media (max-width: 768px) {
-    .employeeForm {
-      padding: 10px;
-    }
-  
-    .employeeForm label {
-      font-size: 14px;
-    }
-  
-    .employeeForm input,
-    .employeeForm select {
-      font-size: 14px;
-      padding: 8px;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-  
-    .employeeForm button {
-      font-size: 14px;
-          
-    }
-  
-    h1 {
-      font-size: 2em;
-    }
-  
-    h2 {
-      font-size: 1.5em;
-    }
-  
-    a {
-      font-size: 1em;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .employeeForm {
-      padding: 5px;
-    }
-  
-    .employeeForm label {
-      font-size: 12px;
-    }
-  
-    .employeeForm input,
-    .employeeForm select {
-      font-size: 12px;
-      padding: 6px;
-      
-    }
-  
-    .employeeForm button {
-      font-size: 12px;
-      padding: 6px;
-    }
-  
-    h1 {
-      font-size: 1.5em;
-    }
-  
-    h2 {
-      font-size: 1.2em;
-    }
-  
-    a {
-      font-size: 0.9em;
-    }
-  }
 
-/*************************** sortableHeader Component CSS *************/
+ /* #endregion */  
+   
+/* #region sortableHeader Component*/  
 
 .sortableHeaderContent {
     display: flex;
@@ -453,8 +481,10 @@ body {
     text-align: center;
     cursor: pointer;
 }
- 
-/**************************** Error Component *****************************/
+
+/* #endregion */
+
+/* #region Error Component */
 
 .wrapperError{
   max-width: 85%;
@@ -499,4 +529,5 @@ body {
 .error-message p{ 
   font-size: clamp(15px, 10vw,30px);
 }  
-  
+
+/* #endregion */
