@@ -295,7 +295,7 @@ const formatDate = (dateString) => {
                         onClick={() => handleEdit(item.id)}
                         className="edit-button"
                         aria-label={`Edit ${item.firstName} ${item.lastName}`}>
-                          <FaPenToSquare />
+                          <FaPenToSquare className="icon" />
                       </button>
                     </td>
                     <td>
@@ -303,7 +303,7 @@ const formatDate = (dateString) => {
                         onClick={() => handleDelete(item.id)}
                         className="delete-button"
                         aria-label={`Delete ${item.firstName} ${item.lastName}`}>
-                        <FaTimes />
+                        <FaTimes className="icon"/>
                       </button>
                     </td>
                   </tr>

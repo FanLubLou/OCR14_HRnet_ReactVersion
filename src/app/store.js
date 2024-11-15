@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import employeeReducer from './../features/Employee/EmployeeSlice';
-// Importez d'autres reducers si nécessaire
 
-// Fonction pour charger l'état depuis le localStorage
+// Function dedicated to load states from localStorage
 const loadState = () => {
   try {
     const serializedState = localStorage.getItem('reduxState');
@@ -16,7 +15,7 @@ const loadState = () => {
   }
 };
 
-// Fonction pour sauvegarder l'état dans le localStorage
+// Function dedicated to save state to localStorage
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
@@ -31,12 +30,12 @@ const preloadedState = loadState();
 export const store = configureStore({
   reducer: {
     employees: employeeReducer,
-    // Ajoutez d'autres reducers ici
+    
   },
   preloadedState,
 });
 
-// Écoutez les changements du store et sauvegardez dans le localStorage
+// Listening potential store updates and save them into localStorage 
 store.subscribe(() => {
   saveState(store.getState());
 });

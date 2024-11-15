@@ -297,7 +297,7 @@ body {
 }
 /* #endregion */
 
- /* #region EmployeeList dataTable */
+/* #region EmployeeList dataTable */
   
   .containerEmployeeTable {
       min-height: 400px;
@@ -336,7 +336,7 @@ body {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 15px;
-      min-width: 768px;
+      /* min-width: 768px; */
   }
   
   .employeeTable th,
@@ -393,6 +393,11 @@ body {
       background-color: var(--secondary-Gray-semi-dark);
       cursor: not-allowed;
   }
+
+  .icon{
+    width: 0.8rem;
+    height: 0.8rem;
+  }
   
   .error {
     color: var(--danger-Red);
@@ -401,11 +406,37 @@ body {
 
   /* #endregion */
 
+/* #region EmployeeList dataTable 1100px*/
+@media (max-width: 1100px) {
+  .containerEmployeeTable {
+    padding: 2px;
+}
+
+  .employeeTable-info,
+  .employeeTable-pagination {
+      font-size: 14px;
+  }
+
+  .employeeTable th,
+  .employeeTable td {
+      font-size: 14px;
+  }
+
+  .itemsEmployeeTable select,
+  .searchEmployeeTable input {
+      font-size: 14px;
+  }
+
+  .employeeTable-pagination button {
+      font-size: 14px;
+  }
+
+}
+
+/* #endregion */  
+
 /* #region EmployeeList dataTable 768px*/
-  @media (max-width: 768px) {
-      .containerEmployeeTable {
-          padding: 10px;
-      }
+  @media (max-width: 768px) {      
   
       .headerEmployeeTable {
           flex-direction: column;
@@ -414,21 +445,26 @@ body {
   
       .employeeTable-info,
       .employeeTable-pagination {
-          font-size: 14px;
+          font-size: 12px;
       }
   
       .employeeTable th,
       .employeeTable td {
-          font-size: 14px;
+          font-size: 12px;
       }
   
       .itemsEmployeeTable select,
       .searchEmployeeTable input {
-          font-size: 14px;
+          font-size: 12px;
+          
+      }
+      .searchEmployeeTable {
+        padding-top: 5px;
+
       }
   
       .employeeTable-pagination button {
-          font-size: 14px;
+          font-size: 12px;
       }
   }
 

@@ -13,6 +13,7 @@ HRnet is a React-based employee management system that allows you to create, vie
 - Create new employee records with detailed information
 - View and search existing employee records in a sortable table
 - Edit existing employee information
+- Delete existing employee information
 - Responsive design for various screen sizes
 - State management using Redux
 - Form validation to ensure data integrity
