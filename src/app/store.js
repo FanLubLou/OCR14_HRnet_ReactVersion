@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import employeeReducer from './../features/Employee/EmployeeSlice';
+import employeeReducer from './../features/Employee/employeeSlice';
 
 // Function dedicated to load states from localStorage
 const loadState = () => {

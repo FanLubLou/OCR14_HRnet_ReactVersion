@@ -3,10 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { states } from '../../data/states.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmployee, editEmployee } from '../../features/Employee/EmployeeSlice.js';
+import { addEmployee, editEmployee } from '../../features/Employee/employeeSlice.js';
 import { FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import Modal from 'react-modal';
+import JclModal from 'jcl-custom-modal/dist/lib/JclModal.js';
+
 
 
 /**
@@ -346,7 +348,7 @@ useEffect(() => {
             {id ? "Update Employee" : "Add Employee"}
           </button>
         </form>
-        <Modal
+        <JclModal
           isOpen={isModalOpen}          
           onRequestClose={closeModal}
           ariaHideApp={false}
@@ -368,7 +370,7 @@ useEffect(() => {
               <p>{id ? 'Employee updated successfully!' : 'Employee saved successfully!'}</p>
             </div>
           </div>          
-        </Modal>
+        </JclModal>
       </div>
     );
 }

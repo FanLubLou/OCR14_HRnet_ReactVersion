@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ComponentSortableHeader from '../ComponentSortableHeader/ComponentSortableHeader';
-import { deleteEmployee } from '../../features/Employee/EmployeeSlice';
+import { deleteEmployee } from '../../features/Employee/employeeSlice';
 import { FaTimes } from 'react-icons/fa'
 import { FaPenToSquare } from 'react-icons/fa6';
 
