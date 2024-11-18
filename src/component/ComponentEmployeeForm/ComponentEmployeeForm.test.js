@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-import employeeReducer from '../../features/Employee/EmployeeSlice';
+import employeeReducer from '../../features/Employee/employeeSlice';
 import ComponentEmployeeForm from './ComponentEmployeeForm';
 
 // Configuration du store pour les tests

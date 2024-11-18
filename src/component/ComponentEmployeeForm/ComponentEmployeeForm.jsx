@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, editEmployee } from '../../features/Employee/employeeSlice.js';
 import { FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import Modal from 'react-modal';
 import JclModal from 'jcl-custom-modal/dist/lib/JclModal.js';
 
 
@@ -15,7 +14,7 @@ import JclModal from 'jcl-custom-modal/dist/lib/JclModal.js';
  * Set the app root for accessibility, excluding test environments.
  */
 if (process.env.NODE_ENV !== 'test') {
-  Modal.setAppElement('#root');
+  JclModal.setAppElement('#root');
 }
 
 /**
