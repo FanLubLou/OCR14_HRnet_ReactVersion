@@ -6,16 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, editEmployee } from '../../features/Employee/employeeSlice.js';
 import { FaTimes } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import JclModal from 'jcl-custom-modal/dist/lib/JclModal.js';
-
+import JclModal from 'jcl-custom-modal/dist/JclModal.js';
 
 
 /**
  * Set the app root for accessibility, excluding test environments.
  */
-if (process.env.NODE_ENV !== 'test') {
-  JclModal.setAppElement('#root');
-}
+// if (process.env.NODE_ENV !== 'test') {
+//   JclModal.setAppElement('#root');
+// }
 
 /**
  * Employee form component for adding and editing employees.
@@ -350,7 +349,6 @@ useEffect(() => {
         <JclModal
           isOpen={isModalOpen}          
           onRequestClose={closeModal}
-          ariaHideApp={false}
           className="modal" //declaring a className allows you to disable default style classes          
           >
           <div className="modal-overlay">
