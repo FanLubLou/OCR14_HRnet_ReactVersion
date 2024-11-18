@@ -9,12 +9,6 @@ import { useParams } from 'react-router-dom';
 import JclModal from 'jcl-custom-modal/dist/JclModal.js';
 
 
-/**
- * Set the app root for accessibility, excluding test environments.
- */
-// if (process.env.NODE_ENV !== 'test') {
-//   JclModal.setAppElement('#root');
-// }
 
 /**
  * Employee form component for adding and editing employees.
